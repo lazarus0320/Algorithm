@@ -1,32 +1,16 @@
-from os import remove
 import sys
+input = sys.stdin.readline
 
-def bin_search(x, key):
-    ps = 0
-    pl = len(x) - 1
-    cnt = 0
-    while True:
-        pc = (ps + pl) // 2
-        if x[pc] == key:
-            cnt += 1
-            print(x)
-            print(f'x[{pc}]')
-            print(f'ps = {ps}')
-            ps += 1
-        elif x[pc] < key:
-            ps = pc + 1
-        else:
-            pl = pc - 1
-        if ps > pl:
-            break
+N = int(input())
+cards = sorted(list(map(int, input().split())))
+M = int(input())
+candidate = list(map(int, input().split()))
 
-    return cnt
+count = {}
+for card in cards:
+    if card in count:
+        count[card] += 1
+    else:
+        count[card] = 1
 
-N = int(sys.stdin.readline())
-Nlst = list(map(int, sys.stdin.readline().split()))
-Nlst.sort()
-M = int(sys.stdin.readline())
-Mlst = list(map(int, sys.stdin.readline().split()))
-
-for i in range(N):
-    print(f'cnt = {bin_search(Nlst, Mlst[i])}')
+print(' '.join(str(count[m]) if m in count else '0' for m in candidate))
