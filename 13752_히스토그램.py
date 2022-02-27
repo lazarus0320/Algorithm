@@ -1,3 +1,6 @@
-nums = list(map(int, input().split()))
-nums.remove(max(nums))
-print(max(nums))
+N = int(input())
+for i in range(N):
+    a = int(input())
+    for j in range(a):
+        print('=', end='')
+    print()

@@ -2,4 +2,6 @@ import sys
 input = sys.stdin.readline
 N = int(input())
 lst = list(map(int, input().split()))
-print(lst)
+mul = 1
+
+print('hi')

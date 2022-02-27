@@ -1,7 +1,7 @@
 import sys
 from bisect import bisect_left, bisect_right
 
-input = sys.stdin.readline()
+input = sys.stdin.readline
 
 def bisearch(x, left, right):
     l = bisect_left(x, left)

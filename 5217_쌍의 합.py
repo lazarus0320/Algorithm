@@ -12,7 +12,12 @@ for _ in range(num):
                 lst.append((i, j))
     result = f'Pairs for {a}: '
     for l in lst:
+        cnt = 0
         aa = f'{l[0]} {l[1]}'
-        result += ', '.join(aa)
+        if cnt == 0:
+            result += aa
+        else:
+            result += ', '.join(aa)
+        
     print(result)
     lst = []                
