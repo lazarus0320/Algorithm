@@ -16,9 +16,9 @@ for _ in range(T):
             lev.append(p)
             dq.append(p1)
             
-        
         if lev[0] == maxx:
             lev.popleft()
+            
             a = dq.popleft()
             pcnt += 1
             if a == 'A':
