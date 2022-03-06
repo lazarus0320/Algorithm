@@ -1,0 +1,10 @@
+import sys
+cal = sys.stdin.readline().rstrip().split('-')
+print(cal)
+for i in range(len(cal)):
+    cal[i] = sum(list(map(int, cal[i].split('+'))))
+print(cal)
+
+for i in range(1, len(cal)):
+    cal[0] -= cal[i]
+print(cal[0])
