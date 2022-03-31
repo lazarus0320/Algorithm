@@ -1,0 +1,27 @@
+import sys; input = sys.stdin.readline
+def prime(x):
+    for i in range(2, int(x**0.5)+1):
+        if x % i == 0:
+            return False
+    return True
+T = int(input())
+for _ in range(T):
+    num = int(input())
+    prime_lst = [2, 3]
+
+    for i in range(4, num+1):
+        if prime(i):
+            prime_lst.append(i)
+    flag = False
+    for p in range(len(prime_lst)):
+        if flag == True:
+            break
+        if prime_lst[p] * 2 == num:
+            print(prime_lst[p], prime_lst[p])
+            break
+        elif prime_lst[p] * 2 > num:
+            for i in range(p, 0, -1):
+                if prime_lst[p] + prime_lst[i] == num:
+                    print(prime_lst[i], prime_lst[p])
+                    flag = True
+                    break
