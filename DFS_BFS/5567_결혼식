@@ -1,0 +1,36 @@
+import sys; input = sys.stdin.readline
+from collections import deque
+
+def bfs(start):
+    queue = deque([start])
+    visited[start] = 1
+    
+    while queue:
+        v = queue.popleft()
+        for i in graph[v]:
+            if v == 1 and visited[i] == 0 :
+                visited[i] = 3
+                queue.append(i)
+                
+            elif visited[v] == 3 and visited[i] == 0:
+                visited[i] = 2
+                queue.append(i)
+                
+            elif visited[i] == 0:
+                visited[i] = 1
+                queue.append(i)
+
+n = int(input().rstrip()) # 동기 수, 간선
+m = int(input().rstrip())
+graph = [[] for i in range(n+1)]
+visited = [0] * (n+1)
+for i in range(m):
+    x, y = map(int, input().split())
+    graph[x].append(y)
+    graph[y].append(x)
+bfs(1)
+cnt = 0
+for i in range(2, n+1):
+    if visited[i] >= 2:
+        cnt += 1
+print(cnt)
