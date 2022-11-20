@@ -1,6 +1,7 @@
 import sys
 N = int(sys.stdin.readline())
 for _ in range(N):
+    
     x1, y1, r1, x2, y2, r2 = map(int, sys.stdin.readline().split())
     S = ((x2-x1)**2 + (y2-y1)**2)**0.5
 
