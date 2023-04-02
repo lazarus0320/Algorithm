@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 25192 KB, 시간: 172 ms
+메모리: 20660 KB, 시간: 108 ms
 
 ### 분류
 
@@ -46,7 +46,7 @@
 
 <p>이다솜 : 네. 야호!!</p>
 
-<p>'<img alt="" src="" style="height:181px; width:274px"></p>
+<p>'<img alt="" src="https://www.acmicpc.net/upload/201004/p3.PNG" style="height:181px; width:274px"></p>
 
 <p>오영식 : 어? 오박사님 얘는 누구인가요?</p>
 
@@ -62,7 +62,7 @@
 
 <p>이다솜 : 그럼 꼬렛을 다시 잡으러 가야겠다. 영식아, 그리고 민식박사님 빠잉!</p>
 
-<p><img alt="" src="" style="height:179px; width:274px"></p>
+<p><img alt="" src="https://www.acmicpc.net/upload/201004/p5.PNG" style="height:179px; width:274px"></p>
 
 <p>이다솜 : 피카츄 공격!</p>
 
@@ -70,13 +70,13 @@
 
 <p>가라 몬스터 볼!</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p7.PNG" style="height:184px; width:274px"></p>
+<p><img alt="" src="" style="height:184px; width:274px"></p>
 
 <p>이다솜 : 야호! 신난다. 꼬렛을 잡았다!!!!!</p>
 
 <p>이다솜 : 그럼! 일단 사천왕을 이기고 오겠어!</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p8.PNG" style="height:181px; width:274px"></p>
+<p><img alt="" src="" style="height:181px; width:274px"></p>
 
 <p>이다솜 : 여기가 사천왕과 대결하려면 가야하는 곳인가..</p>
 
