@@ -28,7 +28,7 @@ int main() {
       cnt = 0;
     }
   }
-  if (cnt % 2 == 1) cout << -1;
+  if (cnt != 0) cout << -1;
   else cout << result;
   return 0;
 }
