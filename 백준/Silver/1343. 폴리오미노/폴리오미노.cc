@@ -1,34 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 int main() {
-  string input;
-  cin >> input;
+  string board;
+  string ans;
   int cnt = 0;
-  string result;
-  input += ' ';
-  for (int i = 0; i < input.size()-1; i++) {
-    if (input[i] == 'X') {
+  cin >> board;
+  board += " ";
+  for (int i = 0; i < board.size()-1; i++) {
+    if (board[i] == 'X') {
       cnt++;
     }
-    if (cnt == 2 && (input[i+1] != 'X')) { // BB박기
-      result += "BB";
+    if (cnt == 2 && board[i+1] != 'X') {
+      ans += "BB";
       cnt = 0;
     }
-    if (cnt == 4) {
-      result += "AAAA";
-      cnt = 0;
-    }
-    if (input[i] == '.') {
-      
+    if (board[i] == '.') {
       if (cnt % 2 == 1) {
         cout << -1;
         return 0;
       }
-      result += '.';
+      ans += '.';
+      cnt = 0;
+    }
+    if (cnt == 4) {
+      ans += "AAAA";
       cnt = 0;
     }
   }
-  if (cnt != 0) cout << -1;
-  else cout << result;
+  if (cnt % 2 == 1) cout << -1;
+  else cout << ans;
   return 0;
 }
