@@ -1,30 +1,27 @@
-import java.util.Stack;
-
+import java.util.*;
 class Solution {
     public int solution(String s) {
         int answer = 0;
         Stack<Character> stack = new Stack<>();
         
-        // Rotate the string and check for valid parentheses
         for (int rotation = 0; rotation < s.length(); rotation++) {
-            // Reset the stack for each rotation
             stack.clear();
-            
-            // Iterate through the characters of the rotated string
             for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt((i + rotation) % s.length()); // Rotate the index
+                char c = s.charAt((i + rotation) % s.length());
                 
-                if (c == '[' || c == '{' || c == '(') {
+                if (c == '[' || c == '(' || c == '{') {
                     stack.push(c);
-                } else {
+                }
+                else {
                     if (stack.isEmpty()) {
-                        break; // Invalid parentheses
+                        break;
                     }
                     char top = stack.peek();
-                    if ((c == ']' && top == '[') || (c == '}' && top == '{') || (c == ')' && top == '(')) {
+                    if ( (top == '(' && c == ')') || (top == '{' && c == '}') || (top == '[' && c == ']') ) {
                         stack.pop();
-                    } else {
-                        break; // Mismatched parentheses
+                    }
+                    else {
+                        break;
                     }
                 }
                 
@@ -33,7 +30,6 @@ class Solution {
                 }
             }
         }
-        
         return answer;
     }
 }
