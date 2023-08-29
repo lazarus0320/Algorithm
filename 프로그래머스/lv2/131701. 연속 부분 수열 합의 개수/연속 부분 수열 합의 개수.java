@@ -1,20 +1,22 @@
 import java.util.*;
+import java.util.stream.*;
+
 class Solution {
     public int solution(int[] elements) {
-
-        HashSet<Integer> set = new HashSet<Integer>();
-        for (int i = 1; i <= elements.length; i++) {
-            
-            for (int j = 0; j < elements.length; j++) {
-                int temp = 0;
-                int idx = j;
-                for (int k = 0; k < i; k++) {
-                    temp += elements[idx % elements.length];
-                    idx++;
-                }
-                set.add(temp);
+        int[] newElements = new int[elements.length * 2];
+        
+        for(int i = 0; i < elements.length; i++) {
+            newElements[i] = newElements[i + elements.length] = elements[i];
+        }
+        
+        Set<Integer> set = new HashSet<>();
+        
+        for(int i = 1; i <= elements.length; i++) {
+            for(int j = 0; j < elements.length; j++) {
+                set.add(Arrays.stream(newElements, j, j+i).sum());
             }
         }
+        
         return set.size();
     }
 }
