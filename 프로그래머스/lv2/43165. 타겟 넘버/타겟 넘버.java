@@ -1,21 +1,20 @@
 class Solution {
-    static int count = 0;
     
     public int solution(int[] numbers, int target) {
-        dfs(0, 0, numbers, target);
-        return count;
+        return backTrack(0, 0, numbers, target);
     }
     
-    public void dfs(int depth, int currentSum, int[] numbers, int target) {
+    public int backTrack(int depth, int sumValue, int[] numbers, int target) {
         if (depth == numbers.length) {
-            if (currentSum == target) {
-                count++;
+            if (sumValue == target) {
+                return 1;
             }
-            return;
+            return 0;
         }
         
-        // Add the current number and subtract it to explore both possibilities
-        dfs(depth + 1, currentSum + numbers[depth], numbers, target);
-        dfs(depth + 1, currentSum - numbers[depth], numbers, target);
+        int addCase = backTrack(depth + 1, sumValue + numbers[depth], numbers, target);
+        int minusCase = backTrack(depth + 1, sumValue - numbers[depth], numbers, target);
+        return addCase + minusCase;
     }
 }
+
