@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Solution {
+    public int solution(String[] friends, String[] gifts) {
+        
+        Map<String, Integer> friendsMap = new HashMap<>();
+        
+        // 친구 이름을 인덱스와 매핑
+        for (int i = 0; i < friends.length; i++) {
+            friendsMap.put(friends[i], i);
+        }
+        
+        int[] netGifts = new int[friends.length];
+        int[][] giftRecords = new int[friends.length][friends.length];
+        
+        // 선물 기록을 통해 netGifts와 giftRecords를 업데이트
+        for (String gift : gifts) {
+            String[] giftInfo = gift.split(" ");
+            int giverIndex = friendsMap.get(giftInfo[0]);
+            int receiverIndex = friendsMap.get(giftInfo[1]);
+            
+            netGifts[giverIndex]++;
+            netGifts[receiverIndex]--;
+            giftRecords[giverIndex][receiverIndex]++;
+        }
+        
+        int maxRank = 0;
+        
+        // 각 친구의 랭크를 계산
+        for (int i = 0; i < friends.length; i++) {
+            int currentRank = 0;
+            for (int j = 0; j < friends.length; j++) {
+                if (i != j) {
+                    if (giftRecords[i][j] > giftRecords[j][i]) {
+                        currentRank++;
+                    } else if (giftRecords[i][j] == giftRecords[j][i] && netGifts[i] > netGifts[j]) {
+                        currentRank++;
+                    }
+                }
+            }
+            maxRank = Math.max(maxRank, currentRank);
+        }
+        
+        return maxRank;
+    }
+}
