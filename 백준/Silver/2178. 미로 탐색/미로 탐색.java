@@ -9,8 +9,8 @@ public class Main {
 	static int[][] graph;
 	static boolean[][] visited;
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static int[] dx = {-1, 0, 1, 0};
-	static int[] dy = {0, 1, 0, -1};
+	static int[] dx = {0, 0, -1, 1};
+	static int[] dy = {-1, 1, 0, 0}; 
 	
 	private static class Node {
 		int x, y;
@@ -19,6 +19,7 @@ public class Main {
 			this.x = x;
 			this.y = y;
 		}
+		
 	}
 	
 	private static void bfs() {
@@ -28,21 +29,19 @@ public class Main {
 		visited[1][1] = true;
 		
 		while (!queue.isEmpty()) {
-			
 			Node curNode = queue.poll();
 			
 			for (int i = 0; i < 4; i++) {
-				
 				int nearX = curNode.x + dx[i];
 				int nearY = curNode.y + dy[i];
 				
 				if (nearX > 0 && nearY > 0 &&
-						nearX <= M && nearY <= N && 
+						nearX <= M && nearY <= N &&
 						graph[nearY][nearX] != 0 && !visited[nearY][nearX]) {
 					
+					visited[nearY][nearX] = true;
 					queue.add(new Node(nearY, nearX));
 					graph[nearY][nearX] = graph[curNode.y][curNode.x] + 1;
-					visited[nearY][nearX] = true;
 				}
 			}
 		}
@@ -54,8 +53,8 @@ public class Main {
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		
-		visited = new boolean[N+1][M+1];
 		graph = new int[N+1][M+1];
+		visited = new boolean[N+1][M+1];
 		
 		for (int i = 1; i <= N; i++) {
 			String line = br.readLine();
@@ -66,6 +65,7 @@ public class Main {
 		}
 		
 		bfs();
+		
 		System.out.println(graph[N][M]);
 		
 	}
