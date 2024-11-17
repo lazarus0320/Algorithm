@@ -7,9 +7,9 @@ public class Main {
 	
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
+	static int N, M;
 	static int[][] graph;
 	static boolean[] visited;
-	static int N, M;
 	static Stack<Integer> stack = new Stack<>();
 	
 	private static int dfs(int start) {
@@ -20,7 +20,6 @@ public class Main {
 		stack.push(start);
 		
 		while (!stack.isEmpty()) {
-			
 			int node = stack.pop();
 			
 			for (int i = 1; i <= N; i++) {
@@ -28,11 +27,13 @@ public class Main {
 				if (graph[node][i] == 1 && !visited[i]) {
 					count++;
 					
-					stack.push(i);
 					visited[i] = true;
+					stack.push(i);
 				}
 			}
 		}
+		
+		
 		
 		return count;
 		
@@ -43,21 +44,19 @@ public class Main {
 		N = Integer.parseInt(br.readLine());
 		M = Integer.parseInt(br.readLine());
 		
-		graph = new int[N+1][N+1];
 		visited = new boolean[N+1];
 		
+		graph = new int[N+1][N+1];
+		
 		for (int i = 0; i < M; i++) {
-			
-			StringTokenizer sb = new StringTokenizer(br.readLine());
-			int x = Integer.parseInt(sb.nextToken());
-			int y = Integer.parseInt(sb.nextToken());
-			
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int x = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
 			
 			graph[x][y] = graph[y][x] = 1;
-			
-			
 		}
 		
 		System.out.println(dfs(1));
+		
 	}
 }
