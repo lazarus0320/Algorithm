@@ -83,6 +83,7 @@ class Main {
 				// 주어진 strike, ball과 일치 여부 검산
 				if (tempStrike != strike || tempBall != ball) {
 					isValid = false;
+					break;
 				}
 
 			}
