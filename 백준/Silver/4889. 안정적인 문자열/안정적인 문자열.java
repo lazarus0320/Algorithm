@@ -1,72 +1,39 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.io.*;
 
 class Main {
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-	public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
+        int cycle = 1;
 
-		int cycle = 1;
+        while (true) {
+            String word = br.readLine();
+            if (word.contains("-")) {
+                break;
+            }
 
-		while (true) {
-			int answer = 0;
-			Stack<Character> stack = new Stack<>();
-			String word = br.readLine();
-			if (word.contains("-")) {
-				break;
-			}
-			word += " ";
-
-			for (int i = 0; i < word.length(); i++) {
-				if (word.charAt(i) == ' ') {
-					break;
-				}
-				char c = word.charAt(i);
-				if (c == '}') {
-					if (stack.empty() || stack.peek() == '}') {
-						stack.push('}');
-					}
-					else if (stack.peek() == '{') {
-						stack.pop();
-					}
-				}
-				else if (c == '{') {
-					stack.push('{');
-
-				}
-			}
-
-			while (!stack.isEmpty()) {
-				int first = stack.pop();
-				int second = stack.pop();
-
-				if (first == second) {
-					answer++;
-				}
-				else {
-					answer += 2;
-				}
-			}
-
-			System.out.println(cycle + ". " + answer);
-			cycle++;
-			/**
-			 * 문자열 순으로 하나씩 확인
-			 * 스택 비었는데 닫는 괄호 먼저 나오면 여는 괄호로 변경 후 스택 넣기, cnt
-			 * 지금 문자가 닫는 괄호인데 스택에 여는 괄호? 스택에서 하나 뽑기
-			 * 지금 문자가 여는 괄호인데 스택에 여는 괄호? 스택에서 하나 뽑기, cnt
-			 */
-		}
-	}
+            int answer = 0;
+            int open = 0; // 여는 괄호의 개수
+            
+            // 첫 번째 패스: 올바른 괄호쌍 처리
+            for (char c : word.toCharArray()) {
+                if (c == '{') {
+                    open++;
+                } else if (c == '}') {
+                    if (open > 0) {
+                        open--; // 매칭되는 여는 괄호가 있으면 사용
+                    } else {
+                        answer++; // 여는 괄호로 변경 필요
+                        open++;
+                    }
+                }
+            }
+            
+            // 남은 여는 괄호들 처리
+            answer += open / 2; // 짝수 개의 여는 괄호는 서로 닫아줌
+            
+            System.out.println(cycle + ". " + answer);
+            cycle++;
+        }
+    }
 }
-// {{{}{{
-// {{}}{{}}
-// 	{{{}}}{{
-/**
- * }{ -> }를 {, } -> { : 2
- * {{{} ->
- * {{{
- */
