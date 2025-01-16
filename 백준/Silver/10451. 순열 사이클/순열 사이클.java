@@ -1,60 +1,53 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
-	static int testCase, N;
-	static int[][] graph;
-	static int[] visited;
-	static Queue<Integer> queue = new LinkedList<>();
+class Main {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static int N = 0;
+	static int M = 0;
+	static int[] graph;
+	static boolean[] visit;
 
-	public static void dfs(int startNode) {
-		visited[startNode] = 1;
+	static int dfs(int node, int startNode) {
+		int count = 0;
+		visit[node] = true;
+		int nextNode = graph[node];
 
-		for (int i = 1; i <= N; i++) {
-			if (graph[startNode][i] == 1 && visited[i] == 0) {
-				dfs(i);
-			}
+		if (nextNode == 0) {
+			return 0;
 		}
+		if (startNode == nextNode) {
+			return 1;
+		}
+		if (!visit[nextNode]) {
+			count = dfs(nextNode, startNode);
+		}
+		return count;
 	}
-
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		int T = Integer.parseInt(br.readLine());
 
-		testCase = Integer.parseInt(st.nextToken());
+		for (int cycle = 0; cycle < T; cycle++) {
+			int N = Integer.parseInt(br.readLine());
+			int answer = 0;
+			visit = new boolean[N+1];
+			graph = new int[N+1];
+			StringTokenizer st = new StringTokenizer(br.readLine());
 
-		for (int i = 0; i < testCase; i++) {
-			StringTokenizer st2 = new StringTokenizer(br.readLine());
-			N = Integer.parseInt(st2.nextToken());
-
-			graph = new int[N + 1][N + 1];
-			visited = new int[N + 1];
-
-			String input = br.readLine();
-			String[] numStrArr = input.split(" ");
-
-			for (int j = 0; j < N; j++) {
-				int num = Integer.parseInt(numStrArr[j]);
-				graph[j+1][num] = graph[num][j+1] = 1;
+			for (int i = 1; i <= N; i++) {
+				int num = Integer.parseInt(st.nextToken());
+				graph[i] = num;
 			}
 
-
-			int result = 0;
-			for (int j = 1; j <= N; j++) {
-				if (visited[j] == 0) {
-					dfs(j);
-					result++;
+			for (int i = 1; i <= N; i++) {
+				if (!visit[i]) {
+					answer += dfs(i, i);
 				}
-
 			}
-
-			System.out.println(result);
+			System.out.println(answer);
 		}
 	}
-
 }
