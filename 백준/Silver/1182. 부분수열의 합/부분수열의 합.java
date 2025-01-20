@@ -6,54 +6,38 @@ import java.util.LinkedHashSet;
 import java.util.StringTokenizer;
 
 class Main {
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static int N, S, ans;
-	static int[] inputArr, grabArr;
-	static boolean[] visited;
+	static int[] arr;
 
 	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
+
 		N = Integer.parseInt(st.nextToken());
 		S = Integer.parseInt(st.nextToken());
 
-		inputArr = new int[N];
-		grabArr = new int[N];
-		visited = new boolean[N];
-		ans = 0;
-
+		arr = new int[N];
 		st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
-			inputArr[i] = Integer.parseInt(st.nextToken());
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
 
-		for (int i = 1; i <= N; i++) {
-			dfs(0, 0, i);
-		}
+		dfs(0, 0, 0);
 
 		System.out.println(ans);
-
 	}
 
-	public static void dfs(int depth, int index, int maxGrab) {
-		if (depth == maxGrab) {
-			int sum = 0;
-			for (int num : grabArr) {
-				sum += num;
-			}
-
-			if (sum == S) {
-				ans++;
-			}
+	// count: 현재까지 선택한 원소의 개수
+	private static void dfs(int idx, int sum, int count) {
+		if (idx == N) {
+			// 크기가 양수이고 합이 S인 경우만 카운트
+			if (count > 0 && sum == S) ans++;
 			return;
 		}
 
-		for (int i = 0; i < N; i++) {
-			if (!visited[i] && index <= i) {
-				visited[i] = true;
-				grabArr[depth] = inputArr[i];
-				dfs(depth+1, i, maxGrab);
-				visited[i] = false;
-			}
-		}
+		// 현재 원소를 선택하는 경우
+		dfs(idx + 1, sum + arr[idx], count + 1);
+		// 현재 원소를 선택하지 않는 경우
+		dfs(idx + 1, sum, count);
 	}
 }
