@@ -48,27 +48,24 @@ class Main {
 		}
 
 		for (int j = 0; j < 4; j++) {
+			if (operationArr[j] > 0) {
+				operationArr[j]--;
 
-			if (j == 0 && operationArr[j] > 0) {
-				operationArr[j]--;
-				dfs(depth + 1, result + inputArr[depth + 1]);
+				if (j == 0) {
+					dfs(depth + 1, result + inputArr[depth + 1]);
+				}
+				else if (j == 1) {
+					dfs(depth + 1, result - inputArr[depth + 1]);
+				}
+				else if (j == 2) {
+					dfs(depth + 1, result * inputArr[depth + 1]);
+				}
+				else if (j == 3) {
+					dfs(depth + 1, result / inputArr[depth + 1]);
+				}
 				operationArr[j]++;
 			}
-			else if (j == 1 && operationArr[j] > 0) {
-				operationArr[j]--;
-				dfs(depth + 1, result - inputArr[depth + 1]);
-				operationArr[j]++;
-			}
-			else if (j == 2 && operationArr[j] > 0) {
-				operationArr[j]--;
-				dfs(depth + 1, result * inputArr[depth + 1]);
-				operationArr[j]++;
-			}
-			else if (j == 3 && operationArr[j] > 0) {
-				operationArr[j]--;
-				dfs(depth + 1, result / inputArr[depth + 1]);
-				operationArr[j]++;
-			}
+
 		}
 
 	}
