@@ -27,31 +27,41 @@ class Main {
 		int count = 0;
 		int max = 0;
 
-		// 초기 윈도우
-		for(int i = 0; i < k; i++) {
-			if(eaten[belt[i]]++ == 0) count++;
+		for (int i = 0; i < k; i++) {
+			if (eaten[belt[i]] == 0) {
+				count++;
+			}
+			eaten[belt[i]]++;
 		}
 
-		// 쿠폰 초밥 확인
-		if(eaten[c] == 0) count++;
+		if (eaten[c] == 0) {
+			count++;
+		}
 		max = count;
-		if(eaten[c] == 0) count--;
-
-		// 슬라이딩
-		for(int i = 1; i < N; i++) {
-			// 이전 초밥 제거
-			if(--eaten[belt[i-1]] == 0) count--;
-
-			// 새 초밥 추가
-			int end = (i + k - 1) % N;
-			if(eaten[belt[end]]++ == 0) count++;
-
-			// 쿠폰 확인
-			if(eaten[c] == 0) count++;
-			max = Math.max(max, count);
-			if(eaten[c] == 0) count--;
+		if (eaten[c] == 0) {
+			count--;
 		}
 
+		for (int i = 1; i < N; i++) {
+			eaten[belt[i - 1]]--;
+			if (eaten[belt[i - 1]] == 0) {
+				count--;
+			}
+
+			int end = (i + k - 1) % N;
+			if (eaten[belt[end]] == 0) {
+				count++;
+			}
+			eaten[belt[end]]++;
+
+			if (eaten[c] == 0) {
+				count++;
+			}
+			max = Math.max(max, count);
+			if (eaten[c] == 0) {
+				count--;
+			}
+		}
 		return max;
 	}
 }
