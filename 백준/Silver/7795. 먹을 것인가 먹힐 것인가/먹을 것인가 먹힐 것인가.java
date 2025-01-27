@@ -35,13 +35,12 @@ class Main {
 	static int solution(int N, int M, int[] arrA, int[] arrB) {
 		int ans = 0;
 
-		for (int i = 0; i < M; i++) {
-			for (int j = 0; j < N; j++) {
-				if (arrB[i] < arrA[j]) {
-					ans += N - j;
-					break;
-				}
+		int aPoint = 0;
+		for (int b : arrB) {
+			while (aPoint < N && arrA[aPoint] <= b) {
+				aPoint++;
 			}
+			ans += (N - aPoint);
 		}
 
 		return ans;
