@@ -25,18 +25,18 @@ public class Main {
 
 		int[][] dp = new int[101][N+1];
 
-		for(int i=1; i<101; i++) { //체력에 대해서
-			for(int j=1; j<=N; j++) { //각 사람들을 탐색
-				if(i > hp[j]) { //인사 가능할 때
-					dp[i][j] = Math.max(dp[i][j-1] , dp[i-hp[j]][j-1] + happy[j]);
+		for (int i = 1; i <= 100; i++) {
+			for (int j = 1; j <= N; j++) {
+				if (hp[j] < i) {
+					dp[i][j] = Math.max(dp[i][j - 1], dp[i - hp[j]][j - 1] + happy[j]);
 				}
 				else {
-					dp[i][j] = dp[i][j-1];
+					dp[i][j] = dp[i][j - 1];
 				}
 			}
 		}
 
-		System.out.println(dp[100][N]);
+		System.out.print(dp[100][N]);
 
 	}
 }
