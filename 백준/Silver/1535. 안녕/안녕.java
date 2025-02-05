@@ -1,41 +1,42 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
-class Main {
-	public static void main(String[] args) throws IOException {
-
+//BOJ_1535 안녕
+public class Main {
+	static int N;
+	static int[] hp, happy;
+	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
-		int[] hpArr = new int[N+1]; // 체력 소모
-		int[] happyArr = new int[N+1]; // 기쁨
+		StringTokenizer st;
 
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		for (int i = 1; i <= N; i++) {
-			hpArr[i] = Integer.parseInt(st.nextToken());
+		int N = Integer.parseInt(br.readLine()); //사람 수
+
+		hp = new int[N+1];
+		happy = new int[N+1];
+		st = new StringTokenizer(br.readLine());
+		for(int i=1; i<=N; i++) {
+			hp[i] = Integer.parseInt(st.nextToken());
 		}
 
 		st = new StringTokenizer(br.readLine());
-		for (int i = 1; i <= N; i++) {
-			happyArr[i] = Integer.parseInt(st.nextToken());
+		for(int i=1; i<=N; i++) {
+			happy[i] = Integer.parseInt(st.nextToken());
 		}
 
-		int[][] dp = new int[N + 1][101];
+		int[][] dp = new int[101][N+1];
 
-		for (int i = 1; i <= N; i++) {
-			int hpCost = hpArr[i];
-			int happy = happyArr[i];
-
-			for (int j = 1; j <= 100; j++) {
-				// 이전 상태 그대로 가져오기
-				dp[i][j] = dp[i-1][j];
-
-				// 현재 체력으로 인사할 수 있고, 인사 후에도 체력이 1 이상 남는 경우
-				if (j >= hpCost && j - hpCost > 0) {
-					dp[i][j] = Math.max(dp[i][j], dp[i-1][j-hpCost] + happy);
+		for(int i=1; i<101; i++) { //체력에 대해서
+			for(int j=1; j<=N; j++) { //각 사람들을 탐색
+				if(i > hp[j]) { //인사 가능할 때
+					dp[i][j] = Math.max(dp[i][j-1] , dp[i-hp[j]][j-1] + happy[j]);
+				}
+				else {
+					dp[i][j] = dp[i][j-1];
 				}
 			}
 		}
 
-		System.out.print(dp[N][100]);
+		System.out.println(dp[100][N]);
+
 	}
 }
