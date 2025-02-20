@@ -1,62 +1,54 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
-	
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	
-	static int N, M;
-	static int[][] graph;
-	static boolean[] visited;
-	static Stack<Integer> stack = new Stack<>();
-	
-	private static int dfs(int start) {
-		
+
+	static int[][] field;
+	static boolean[] visit;
+	static int N;
+	static int M;
+
+	static int bfs(int start) {
+		Queue<Integer> queue = new LinkedList<>();
+
+		visit[start] = true;
+		queue.add(start);
+
 		int count = 0;
-		
-		visited[start] = true;
-		stack.push(start);
-		
-		while (!stack.isEmpty()) {
-			int node = stack.pop();
-			
+		while (!queue.isEmpty()) {
+			int node = queue.poll();
 			for (int i = 1; i <= N; i++) {
-				
-				if (graph[node][i] == 1 && !visited[i]) {
+				if (field[node][i] == 1 && !visit[i]) {
+					visit[i] = true;
+					queue.add(i);
 					count++;
-					
-					visited[i] = true;
-					stack.push(i);
 				}
 			}
 		}
-		
-		
-		
+
 		return count;
-		
 	}
 
-	public static void main(String[] args) throws IOException {
-		
+	public static void main(String[] args) throws Exception {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
 		N = Integer.parseInt(br.readLine());
 		M = Integer.parseInt(br.readLine());
-		
-		visited = new boolean[N+1];
-		
-		graph = new int[N+1][N+1];
-		
+
+		field = new int[N+1][N+1];
+		visit = new boolean[N+1];
+
 		for (int i = 0; i < M; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			int x = Integer.parseInt(st.nextToken());
 			int y = Integer.parseInt(st.nextToken());
-			
-			graph[x][y] = graph[y][x] = 1;
+
+			field[x][y]++;
+			field[y][x]++;
 		}
-		
-		System.out.println(dfs(1));
-		
+
+		System.out.print(bfs(1));
 	}
 }
