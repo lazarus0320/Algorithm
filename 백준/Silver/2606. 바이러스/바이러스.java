@@ -8,26 +8,18 @@ public class Main {
 	static boolean[] visit;
 	static int N;
 	static int M;
+	static int ans;
 
-	static int bfs(int start) {
-		Queue<Integer> queue = new LinkedList<>();
+	static void dfs(int start) {
 
 		visit[start] = true;
-		queue.add(start);
 
-		int count = 0;
-		while (!queue.isEmpty()) {
-			int node = queue.poll();
-			for (int i = 1; i <= N; i++) {
-				if (field[node][i] == 1 && !visit[i]) {
-					visit[i] = true;
-					queue.add(i);
-					count++;
-				}
+		for (int i = 1; i <= N; i++) {
+			if (!visit[i] && field[start][i] == 1) {
+				ans++;
+				dfs(i);
 			}
 		}
-
-		return count;
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -48,7 +40,7 @@ public class Main {
 			field[x][y]++;
 			field[y][x]++;
 		}
-
-		System.out.print(bfs(1));
+		dfs(1);
+		System.out.print(ans);
 	}
 }
