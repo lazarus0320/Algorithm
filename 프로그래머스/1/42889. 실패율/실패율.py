@@ -1,22 +1,27 @@
 def solution(N, stages):
-    stages_counts = [0] * (N + 2)
-    for stage in stages:
-        stages_counts[stage] += 1
+    temp = []
+    answer = []
+    dict = {}
+    for i in stages:
+        if i > N:
+            continue
+        dict[i] = dict.get(i, 0) + 1
     
-    fail_rate_list = []
-    users_remain = len(stages)
-    
-    
+    user = len(stages)
+                      
     for i in range(1, N+1):
-        if users_remain == 0:
-            fail_rate = 0
-            
+        cur = dict.get(i, 0)
+        
+        if user == 0:
+            temp.append((i, 0))
         else:
-            fail_rate = stages_counts[i] / users_remain
-        fail_rate_list.append((i, fail_rate))
-        users_remain -= stages_counts[i]
+            temp.append((i, cur/user))
+            
+        user -= cur
     
-    fail_rate_list.sort(key = lambda x: (-x[1], x[0]))
+    temp.sort(key = lambda x: -x[1])
     
-    answer = [stage for stage, _ in fail_rate_list]
-    return answer;
+    for x, y in temp:
+        answer.append(x)
+        
+    return answer
