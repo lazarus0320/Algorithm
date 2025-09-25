@@ -1,18 +1,17 @@
 import math
 
 def solution(sizes):
-    w, h = 0, 0
+    max_v, min_v = 0, 0
     
-    for i, j in sizes:
-        width = max(i, j)
-        height = min(i, j)
+    for x, y in sizes:
+        temp_a = max(x, y)
+        temp_b = min(x, y)
         
-        if w < width:
-            w = width
-        if h < height:
-            h = height
+        if max_v < temp_a:
+            max_v = temp_a
+        if min_v < temp_b:
+            min_v = temp_b
     
-    answer = w * h
-        
+    answer = max_v * min_v
     
     return answer
