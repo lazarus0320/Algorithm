@@ -1,16 +1,18 @@
 def solution(nums):
     answer = 0
-    
     dict = {}
-
-    for n in nums:
-        dict[n] = dict.get(n, 0) + 1
+    for num in nums:
+        dict[num] = dict.get(num, 0) + 1
         
-    
-    if len(dict) > len(nums) // 2:
-        answer = len(nums) // 2
-        
-    else:
+    goal = len(nums) // 2
+    if len(dict) < goal:
         answer = len(dict)
+    else:
+        answer = goal
     
     return answer
+
+# 1 1 1 1 => goal: 2, len(dict) : 1 -> len(dict)
+# 1 2 3 4 => goal: 2, len(dict) : 4 -> goal
+# 1 2 3 4 5 6
+# 1 1 1 1 1 1
