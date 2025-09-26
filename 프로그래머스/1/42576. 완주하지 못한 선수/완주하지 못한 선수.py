@@ -1,14 +1,12 @@
 def solution(participant, completion):
     answer = ''
-    part = {}
+    list = {}
+    for part in participant:
+        list[part] = list.get(part, 0) + 1
     
-    for pa in participant:
-        part[pa] = part.get(pa, 0) + 1
+    for comp in completion:
+        list[comp] -= 1
     
-    for co in completion:
-        part[co] -= 1
-        
-    for name, count in part.items():
-        if count >= 1:
-            answer = name
-    return answer
+    for k, v in list.items():
+        if v > 0:
+            return k
