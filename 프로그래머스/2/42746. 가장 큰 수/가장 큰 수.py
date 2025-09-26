@@ -1,8 +1,7 @@
 def solution(numbers):
     answer = ''
-    num = list(map(str, numbers))
     
-    s = sorted(num, key = lambda x: x*3, reverse = True)
-    answer += ''.join(s)
+    s_numbers = sorted(numbers, key = lambda x: str(x) * 3, reverse = True)
+    answer = ''.join(map(str, s_numbers))
     
-    return str(int(answer))
+    return '0' if answer[0] == '0' else answer
