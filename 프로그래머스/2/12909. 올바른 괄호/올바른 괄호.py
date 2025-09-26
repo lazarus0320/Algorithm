@@ -1,23 +1,20 @@
 def solution(s):
     answer = True
     
+    # 1. 일단 ( 넣기
+    # 2. 없는데 ) 넣으면 false
+    # 3. )이거 넣으면 pop
+    # 4. stack 에 값 있으면 false
+    
     stack = []
+    for char in s:
+        if len(stack) == 0 and char == ')':
+            return False
+        elif char == ')':
+            stack.pop()
+        else: stack.append('(')
     
-    for i in range(len(s)):
-        if len(stack) == 0:
-            if s[i] == ')':
-                return False
-            else:
-                stack.append(s[i])
-        else:
-            if stack[-1] == '(' and s[i] == ')':
-                stack.pop()
-            elif stack[-1] == ')' and s[i] == '(':
-                return False
-            else:
-                stack.append(s[i])
-    
-    if len(stack) != 0:
-        answer = False
+    if len(stack) > 0:
+        return False
 
-    return answer
+    return True
