@@ -5,7 +5,7 @@ def solution(participant, completion):
         list[part] = list.get(part, 0) + 1
     
     for comp in completion:
-        list[comp] -= 1
+        list[comp] = list.get(comp, 0) - 1
     
     for k, v in list.items():
         if v > 0:
