@@ -1,18 +1,18 @@
 def solution(nums):
     answer = 0
+    # dict로 빈도수 체크
     dict = {}
-    for num in nums:
-        dict[num] = dict.get(num, 0) + 1
-        
-    goal = len(nums) // 2
-    if len(dict) < goal:
-        answer = len(dict)
-    else:
-        answer = goal
     
-    return answer
+    for n in nums:
+        dict[n] = dict.get(n, 0) + 1
+    
+    key_num = len(dict)
+    
+    if len(nums) / 2 <= key_num:
+        answer = len(nums) / 2
+    else:
+        answer = key_num
 
-# 1 1 1 1 => goal: 2, len(dict) : 1 -> len(dict)
-# 1 2 3 4 => goal: 2, len(dict) : 4 -> goal
-# 1 2 3 4 5 6
-# 1 1 1 1 1 1
+    return answer
+    
+    # key 개수와 len(nums) / 2 비교했을때 key가 작거나 작으면 key가 답. key가 더 크면 후자가 답 
