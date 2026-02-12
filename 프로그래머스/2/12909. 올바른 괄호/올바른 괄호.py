@@ -1,20 +1,23 @@
 def solution(s):
     answer = True
     
-    # 1. 일단 ( 넣기
-    # 2. 없는데 ) 넣으면 false
-    # 3. )이거 넣으면 pop
-    # 4. stack 에 값 있으면 false
+    # )가 올때 앞의 값이 있으면 뽑기
+    # 비어있는데 )가 오면 False
+    # 맨 마지막에 안비어있으면 False
     
     stack = []
-    for char in s:
-        if len(stack) == 0 and char == ')':
-            return False
-        elif char == ')':
+    
+    for cur in s:
+        if cur == ')':
+            if len(stack) == 0:
+                answer = False
+                break
             stack.pop()
-        else: stack.append('(')
+        
+        else:
+            stack.append('(')
     
     if len(stack) > 0:
-        return False
-
-    return True
+        answer = False
+        
+    return answer
