@@ -1,17 +1,14 @@
 import math
 
 def solution(sizes):
-    max_v, min_v = 0, 0
     
-    for x, y in sizes:
-        temp_a = max(x, y)
-        temp_b = min(x, y)
+    max_a, max_b = 0, 0
+    
+    for w, h in sizes:
+        temp_a = max(w, h)
+        temp_b = min(w, h)
         
-        if max_v < temp_a:
-            max_v = temp_a
-        if min_v < temp_b:
-            min_v = temp_b
+        max_a = max(max_a, temp_a)
+        max_b = max(max_b, temp_b)
     
-    answer = max_v * min_v
-    
-    return answer
+    return max_a * max_b
