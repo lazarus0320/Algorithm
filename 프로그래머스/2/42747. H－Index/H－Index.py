@@ -3,8 +3,13 @@ def solution(citations):
     
     citations.sort()
     
-    for h in range(len(citations)+1):
-        count = sum(1 for cit in citations if h <= cit)
+    for h in range(0, len(citations) + 1):
+        count = 0
+        for cit in citations:
+            if h <= cit:
+                count += 1
+        
         if h <= count:
             answer = h
+    
     return answer
