@@ -2,30 +2,35 @@ from collections import deque
 
 def solution(maps):
     answer = 0
+    rows = len(maps)
+    cols = len(maps[0])
     
-    n = len(maps)
-    m = len(maps[0])
+    dr = [0, 0, 1, -1]
+    dc = [1, -1, 0, 0]
     
-    dx = [0, 0, 1, -1]
-    dy = [-1, 1, 0, 0]
+    visited = [[False] * cols for _ in range(rows)]
     
-    queue = deque([(0, 0, 1)])
-    visited = [[False] * m for _ in range(n)]
-    visited[0][0] = True
-    
-    while queue:
-        x, y, dist = queue.popleft()
+    def bfs(row, col, dist):
+        visited[row][col] = True
+        queue = deque([(row, col, dist)])
         
-        if x == n-1 and y == m-1:
-            return dist
-        
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
+        while queue:
+            r, c, d = queue.popleft()
             
-            if (0 <= nx < n and 0 <= ny < m and
-               maps[nx][ny] == 1 and not visited[nx][ny]):
-                visited[nx][ny] = True
-                queue.append((nx, ny, dist + 1))
+            if r == rows - 1 and c == cols - 1:
+                return d
+            
+            for i in range(4):
+                nr = r + dr[i]
+                nc = c + dc[i]
+            
+                if 0 <= nr < rows and 0 <= nc < cols:
+                    if not visited[nr][nc] and maps[nr][nc] == 1:
+                        visited[nr][nc] = True
+                        queue.append((nr, nc, d + 1))
+            
+        return -1
     
-    return -1
+    return bfs(0, 0, 1)
+    
+    
