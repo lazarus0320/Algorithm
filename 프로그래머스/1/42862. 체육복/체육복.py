@@ -3,16 +3,15 @@ def solution(n, lost, reserve):
     
     both = set(lost) & set(reserve)
     lost = set(lost) - both
-    reserve = set(reserve) - both
-
-    borrow = 0
-    for lo in lost:
-        if lo - 1 in reserve:
-            borrow += 1
-            reserve.remove(lo-1)
+    reserve = sorted(set(reserve) - both)
+    
+    for r in reserve:
+        front = r - 1
+        back = r + 1
         
-        elif lo + 1 in reserve:
-            borrow += 1
-            reserve.remove(lo+1)
+        if front in lost:
+            lost.remove(front)
+        elif back in lost:
+            lost.remove(back)
         
-    return n - len(lost) + borrow
+    return n - len(lost)
